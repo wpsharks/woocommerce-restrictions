@@ -1,0 +1,62 @@
+/*
+ * Dependencies. Requires a local copy of the WP Sharks Core.
+ */
+@import '../../../../../wp-sharks-core/src/client-s/css/bourbon/bourbon';
+@import '../../../../../wp-sharks-core/src/client-s/css/admin/mixins/dashicons';
+@import '../../../../../wp-sharks-core/src/client-s/css/admin/mixins/meta-boxes';
+@import '../../../../../wp-sharks-core/src/vendor/websharks/sharkicons/src/sharkicons';
+@include sharkicons-font('../../../../../wp-sharks-core/src/vendor/websharks/sharkicons/src');
+@include sharkicon-short-classes;
+
+/*
+ * Built-in meta box.
+ */
+@include wp-admin-meta-boxes('#slugdiv');
+
+/*
+ * Prefixed meta boxes.
+ */
+@include wp-admin-meta-boxes('[id^=fdbmjuxwzjfjtaucytprkbcqfpftudyg]');
+
+/*
+ * Prefixed meta boxes.
+ */
+.postbox[id^='fdbmjuxwzjfjtaucytprkbcqfpftudyg'] {
+  > .inside {
+    > .-about.-section {
+      @include wp-admin-dashicon(lock);
+
+      &::before {
+        float:                right;
+        font-size:            3em;
+      }
+    }
+
+    > .-uri-patterns.-section {
+      > .-field > textarea {
+        white-space:          pre;
+        overflow:             auto;
+      }
+
+      .-syntax-examples,
+      .-syntax-tips {
+        ul {
+          margin-top:        .5em;
+        }
+
+        em {
+          font-size:          105%;
+          font-weight:        500;
+          font-style:         normal;
+          font-family:        monospace;
+        }
+      }
+
+      .-syntax-examples {
+        padding-left:         0;
+        margin-left:         .5em;
+        list-style-type:      none;
+      }
+    }
+  }
+}

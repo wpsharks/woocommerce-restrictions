@@ -1,0 +1,85 @@
+/*
+ * Dependencies. Requires a local copy of the WP Sharks Core.
+ */
+@import '../../../../../wp-sharks-core/src/client-s/css/bourbon/bourbon';
+@import '../../../../../wp-sharks-core/src/client-s/css/admin/mixins/fields';
+@import '../../../../../wp-sharks-core/src/client-s/css/admin/mixins/dashicons';
+@import '../../../../../wp-sharks-core/src/client-s/css/jquery-plugins/jsgrid/enhancements';
+@import '../../../../../wp-sharks-core/src/client-s/css/jquery-plugins/ui-tooltip/enhancements';
+
+/*
+ * Sharkicons also.
+ */
+@import '../../../../../wp-sharks-core/src/vendor/websharks/sharkicons/src/sharkicons';
+@include sharkicons-font('../../../../../wp-sharks-core/src/vendor/websharks/sharkicons/src');
+@include sharkicon-short-classes;
+
+/*
+ * Widget styles.
+ */
+#accrhcdehngpugpudhpcwtykbfdykarp-user-permissions-widget {
+  .-grid.jsgrid {
+    @include wp-admin-field-standards;
+    @include jquery-jsgrid-enhancements;
+
+    .jsgrid-grid-header {
+      th {
+        .si[data-toggle~='jquery-ui-tooltip'] {
+          opacity:            0.3;
+          cursor:             help;
+          vertical-align:     middle;
+
+          &:hover {
+            opacity:          1;
+          }
+        }
+      }
+    }
+
+    .jsgrid-grid-body {
+      tr {
+        &.-is-not-allowed {
+          opacity:            0.5;
+        }
+
+        &.-is-allowed {
+          td.-property-restriction-id,
+          td.-property-status {
+            .-title {
+              font-weight:    bold;
+            }
+          }
+        }
+
+        td.-property-restriction-id {
+          .-via {
+            font-size:        80%;
+            font-style:       italic;
+          }
+        }
+
+        td.-property-access-time,
+        td.-property-expire-time {
+          .-date {
+            line-height:      1;
+            font-size:        90%;
+            vertical-align:   middle;
+            display:          inline-block;
+          }
+
+          .-time {
+            line-height:      1;
+            font-size:        70%;
+            vertical-align:   middle;
+            display:          inline-block;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Tooltip enhancements.
+ */
+@include jquery-ui-tooltip-enhancements('.accrhcdehngpugpudhpcwtykbfdykarp-tooltip');

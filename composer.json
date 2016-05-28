@@ -1,0 +1,49 @@
+{
+  "name": "websharks/s2member-x",
+  "homepage": "https://github.com/websharks/s2member-x",
+  "description": "Membership management for WordPress.",
+  "keywords": ["websharks", "wpsharks", "s2member"],
+
+  "type": "project",
+  "license": "GPL-3.0+",
+
+  "authors": [{
+    "name": "websharks",
+    "homepage": "http://websharks-inc.com/",
+    "role": "company"
+  }, {
+    "name": "jaswsinc",
+    "homepage": "http://jaswsinc.com/",
+    "role": "developer"
+  }, {
+    "name": "raamdev",
+    "homepage": "http://raam.org/",
+    "role": "developer"
+  }],
+
+  "support": {
+    "source": "https://github.com/websharks/s2member-x",
+    "issues": "https://github.com/websharks/s2member-x/issues"
+  },
+
+  "require-dev": {},
+
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
+  "autoload": {
+    "psr-4": {
+      "WebSharks\\WpSharks\\s2MemberX\\Classes\\": "src/includes/classes",
+      "WebSharks\\WpSharks\\s2MemberX\\Functions\\": "src/includes/functions",
+      "WebSharks\\WpSharks\\s2MemberX\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\WpSharks\\s2MemberX\\Traits\\": "src/includes/traits"
+    }
+  },
+
+  "config": {
+    "vendor-dir": "src/vendor",
+    "preferred-install": "dist"
+  },
+
+  "repositories": []
+}
