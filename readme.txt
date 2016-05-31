@@ -1,6 +1,6 @@
 === s2Member X ===
 
-Stable tag: 160528.40012
+Stable tag: 160531.1395-RC
 
 Tested up to: 4.5.2
 Requires at least: 4.5.2

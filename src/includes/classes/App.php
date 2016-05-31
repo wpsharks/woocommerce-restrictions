@@ -36,7 +36,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160528.40012'; //v//
+    const VERSION = '160531.1395-RC'; //v//
 
     /**
      * Constructor.
@@ -92,6 +92,8 @@ class App extends SCoreClasses\App
             ],
             '§conflicts' => [
                 '§plugins' => [
+                    's2member'               => 's2Member Framework (Old)',
+                    's2member-pro'           => 's2Member Pro Add-On (Old)',
                     'woocommerce-membership' => 'WooCommerce Membership',
                 ], // <https://www.woothemes.com/products/woocommerce-memberships/>
             ],
