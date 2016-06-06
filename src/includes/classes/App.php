@@ -36,7 +36,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160528.40012'; //v//
+    const VERSION = '160606.80279'; //v//
 
     /**
      * Constructor.
@@ -64,16 +64,20 @@ class App extends SCoreClasses\App
                     ],
                 ],
             ],
+            '§specs' => [
+                '§in_wp'           => false,
+                '§is_network_wide' => false,
+            ],
             '©brand' => [
                 '©name'         => 's2Member X',
                 '©text_domain'  => 's2member-x',
                 '©slug'         => 's2member-x',
                 '©var'          => 's2member_x',
-                '©name'         => 's2Member X',
                 '©acronym'      => 's2x',
                 '©prefix'       => 's2x',
                 'short_acronym' => 's2',
 
+                '§action_base' => '©var',
                 '§domain'      => 'wpsharks.com',
                 '§domain_path' => '/product/s2member-x',
             ],
@@ -92,6 +96,8 @@ class App extends SCoreClasses\App
             ],
             '§conflicts' => [
                 '§plugins' => [
+                    's2member'               => 's2Member Framework (Old)',
+                    's2member-pro'           => 's2Member Pro Add-On (Old)',
                     'woocommerce-membership' => 'WooCommerce Membership',
                 ], // <https://www.woothemes.com/products/woocommerce-memberships/>
             ],
@@ -129,15 +135,6 @@ class App extends SCoreClasses\App
                     ],
                 ],
             ],
-            '§notices' => [
-                '§on_install' => function (array $installion_history) {
-                    return [
-                        'is_transient' => true,
-                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> v%2$s installed successfully.', 's2member-x'), esc_html($this->Config->©brand['©name']), esc_html($this::VERSION)).'<br />'.
-                            sprintf(__('~ Start by protecting some of your content: <a href="%1$s" class="button" style="text-decoration:none;">Create Restriction</a>', 's2member-x'), esc_url(a::createRestrictionUrl())).'</p>',
-                    ];
-                },
-            ],
         ];
         parent::__construct($instance_base, $instance);
     }
@@ -172,7 +169,6 @@ class App extends SCoreClasses\App
             # Misc. variables.
 
             $is_admin = is_admin();
-            $is_multisite = is_multisite();
 
             # Restriction-related hooks.
 
