@@ -1,3 +1,7 @@
+## v160608.43226
+
+- Updating to the latest WPSC.
+
 ## v160606.80145-RC
 
 - Updating to the latest WPSC.
