@@ -39,15 +39,6 @@ class OrderItem extends SCoreClasses\SCore\Base\Core
     protected $subscription_post_type;
 
     /**
-     * All order post types.
-     *
-     * @since 160524 Order item utilities.
-     *
-     * @param array All order post types.
-     */
-    protected $all_order_post_types;
-
-    /**
      * Class constructor.
      *
      * @since 160524 Order item utilities.
@@ -59,124 +50,6 @@ class OrderItem extends SCoreClasses\SCore\Base\Core
         parent::__construct($App);
 
         $this->subscription_post_type = a::subscriptionPostType();
-        $this->all_order_post_types   = wc_get_order_types();
-    }
-
-    /**
-     * Get order containing item.
-     *
-     * @since 160524 Order item utilities.
-     *
-     * @param string|int $item_id Order item ID.
-     *
-     * @return \WC_Abstract_Order|null Order on success.
-     */
-    public function orderByItemId($item_id)
-    {
-        if (!($item_id = (int) $item_id)) {
-            return null; // Not possible.
-        }
-        $WpDb  = s::wpDb(); // DB instance.
-        $table = $WpDb->prefix.'woocommerce_order_items';
-
-        $sql = /* Get the order ID for this item. */ '
-            SELECT `order_id` FROM `'.esc_sql($table).'`
-             WHERE `order_item_id` = %s LIMIT 1';
-        $sql = $WpDb->prepare($sql, $item_id); // Prepare.
-
-        if (!($order_id = (int) $WpDb->get_var($sql))) {
-            return null; // Not possible; can't get order ID.
-        } elseif (!($post_type = get_post_type($order_id))) {
-            debug(0, c::issue(vars(), 'Unable to acquire order post type.'));
-            return null; // Not possible; can't get post type.
-        } elseif (!in_array($post_type, $this->all_order_post_types, true)) {
-            return null; // Not applicable; not an order post type.
-        }
-        switch ($post_type) { // Based on post type.
-
-            case $this->subscription_post_type:
-                $subscription_id = $order_id; // It's a subscription ID.
-                if (($WC_Subscription = wcs_get_subscription($subscription_id))) {
-                    return $WC_Subscription;
-                }
-                return null; // Not possible.
-
-            default: // Any other order type.
-                if (($WC_Order = wc_get_order($order_id))) {
-                    return $WC_Order;
-                }
-                return null; // Not possible.
-        }
-    }
-
-    /**
-     * Get order item by ID.
-     *
-     * @since 160524 Order item utilities.
-     *
-     * @param string|int              $item_id  Order item ID.
-     * @param \WC_Abstract_Order|null $WC_Order The order if already known.
-     *
-     * @return array An order item, else empty array.
-     */
-    public function orderItemById($item_id, \WC_Abstract_Order $WC_Order = null): array
-    {
-        if (!($item_id = (int) $item_id)) {
-            return []; // Not possible.
-        } elseif (!($WC_Order = $WC_Order ?: $this->orderByItemId($item_id))) {
-            return []; // Not possible.
-        }
-        foreach ($WC_Order->get_items() as $_item_id => $_item) {
-            if ($_item_id === $item_id) {
-                return $_item; // Found item by ID.
-            }
-        } // unset($_item_id, $_item); // Housekeeping.
-
-        return []; // Failure.
-    }
-
-    /**
-     * Get product ID from item.
-     *
-     * @since 160524 Order item utilities.
-     *
-     * @param array $item Order item.
-     *
-     * @return int Product ID from item.
-     */
-    public function productIdFromItem(array $item): int
-    {
-        if (!empty($item['variation_id'])) {
-            return (int) $item['variation_id'];
-        }
-        return (int) ($item['product_id'] ?? 0);
-    }
-
-    /**
-     * Get product by order item ID.
-     *
-     * @since 160524 Order item utilities.
-     *
-     * @param string|int              $item_id  Order item ID.
-     * @param \WC_Abstract_Order|null $WC_Order The order if already known.
-     *
-     * @return \WC_Product|null A product object instance, else `null`.
-     */
-    public function productByOrderItemId($item_id, \WC_Abstract_Order $WC_Order = null)
-    {
-        if (!($item_id = (int) $item_id)) {
-            return null; // Not possible.
-        } elseif (!($WC_Order = $WC_Order ?: $this->orderByItemId($item_id))) {
-            return null; // Not possible.
-        }
-        foreach ($WC_Order->get_items() as $_item_id => $_item) {
-            if ($_item_id === $item_id) {
-                $WC_Product = $WC_Order->get_product_from_item($_item);
-                return $WC_Product instanceof \WC_Product ? $WC_Product : null;
-            }
-        } // unset($_item_id, $_item); // Housekeeping.
-
-        return null; // Failure.
     }
 
     /**
@@ -193,25 +66,28 @@ class OrderItem extends SCoreClasses\SCore\Base\Core
         if (!($item_id = (int) $item_id)) {
             debug(0, c::issue(vars(), 'Empty item ID.'));
             return; // Not possible; empty item ID.
-        } elseif (!($WC_Order = $this->orderByItemId($item_id))) {
+        } elseif (!($WC_Order = s::wcOrderByItemId($item_id))) {
             debug(0, c::issue(vars(), 'Unable to acquire order.'));
             return; // Not possible; unable to acquire order.
-        } elseif (!($item = $this->orderItemById($item_id, $WC_Order))) {
-            debug(0, c::issue(vars(), 'Unable to acquire item.'));
+        } elseif (!($order_id = (int) $WC_Order->id)) {
+            debug(0, c::issue(vars(), 'Unable to acquire order ID.'));
+            return; // Not possible; unable to acquire order ID.
+        } elseif (!($order_type = get_post_type($order_id))) {
+            debug(0, c::issue(vars(), 'Unable to acquire order type.'));
+            return; // Not possible; unable to acquire order type.
+        } elseif (!($item = s::wcOrderItemById($item_id, $WC_Order))) {
+            debug(0, c::issue(vars(), 'Unable to acquire order item.'));
             return; // Not possible; unable to acquire order item.
-        } elseif (!($product_id = $this->productIdFromItem($item))) {
+        } elseif (!($product_id = s::wcProductIdFromItem($item))) {
             return; // Not applicable; not associated with a product ID.
-        } elseif (!($post_type = $WC_Order->post->post_type)) {
-            debug(0, c::issue(vars(), 'Unable to acquire order post type.'));
-            return; // Not possible; unable to acquire order post type.
         }
         $WpDb = s::wpDb(); // DB class object instance.
 
-        switch ($post_type) { // Based on post type.
+        switch ($order_type) { // Based on post type.
 
             case $this->subscription_post_type:
-                $WC_Subscription = $WC_Order; // Subscription.
-                $subscription_id = (int) $WC_Order->id;
+                $WC_Subscription = $WC_Order;
+                $subscription_id = $order_id;
                 $where           = [
                     'subscription_id' => $subscription_id,
                     'product_id'      => $product_id,
@@ -220,8 +96,7 @@ class OrderItem extends SCoreClasses\SCore\Base\Core
                 break; // Stop here.
 
             default: // Any other order type.
-                $order_id = (int) $WC_Order->id;
-                $where    = [
+                $where = [
                     'order_id'   => $order_id,
                     'product_id' => $product_id,
                     'item_id'    => $item_id,
@@ -236,6 +111,7 @@ class OrderItem extends SCoreClasses\SCore\Base\Core
 
         c::review(compact(// Log for review.
             'order_id',
+            'order_type',
             'subscription_id',
             'product_id',
             'item_id',
