@@ -1,29 +1,29 @@
 {
-  "name": "websharks/s2member-x",
-  "homepage": "https://github.com/websharks/s2member-x",
+  "name": "websharks/woocommerce-s2member-x",
+  "homepage": "https://github.com/websharks/woocommerce-s2member-x",
   "description": "Membership management for WordPress.",
-  "keywords": ["websharks", "wpsharks", "s2member"],
+  "keywords": ["websharks", "wpsharks", "woocommerce", "s2member x", "s2member"],
 
   "type": "project",
   "license": "GPL-3.0+",
 
   "authors": [{
-    "name": "websharks",
-    "homepage": "http://websharks-inc.com/",
+    "name": "wpsharks",
+    "homepage": "https://wpsharks",
     "role": "company"
   }, {
     "name": "jaswsinc",
-    "homepage": "http://jaswsinc.com/",
+    "homepage": "https://jaswsinc.com",
     "role": "developer"
   }, {
     "name": "raamdev",
-    "homepage": "http://raam.org/",
+    "homepage": "http://raam.org",
     "role": "developer"
   }],
 
   "support": {
-    "source": "https://github.com/websharks/s2member-x",
-    "issues": "https://github.com/websharks/s2member-x/issues"
+    "source": "https://github.com/websharks/woocommerce-s2member-x",
+    "issues": "https://github.com/websharks/woocommerce-s2member-x/issues"
   },
 
   "require-dev": {},
@@ -33,10 +33,10 @@
 
   "autoload": {
     "psr-4": {
-      "WebSharks\\WpSharks\\s2MemberX\\Classes\\": "src/includes/classes",
-      "WebSharks\\WpSharks\\s2MemberX\\Functions\\": "src/includes/functions",
-      "WebSharks\\WpSharks\\s2MemberX\\Interfaces\\": "src/includes/interfaces",
-      "WebSharks\\WpSharks\\s2MemberX\\Traits\\": "src/includes/traits"
+      "WebSharks\\WpSharks\\WooCommerce\\s2MemberX\\Classes\\": "src/includes/classes",
+      "WebSharks\\WpSharks\\WooCommerce\\s2MemberX\\Functions\\": "src/includes/functions",
+      "WebSharks\\WpSharks\\WooCommerce\\s2MemberX\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\WpSharks\\WooCommerce\\s2MemberX\\Traits\\": "src/includes/traits"
     }
   },
 

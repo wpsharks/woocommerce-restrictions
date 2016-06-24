@@ -1,14 +1,14 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\s2MemberX\Classes\Utils;
+namespace WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\Utils;
 
-use WebSharks\WpSharks\s2MemberX\Classes;
-use WebSharks\WpSharks\s2MemberX\Interfaces;
-use WebSharks\WpSharks\s2MemberX\Traits;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Interfaces;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Traits;
 #
-use WebSharks\WpSharks\s2MemberX\Classes\AppFacades as a;
-use WebSharks\WpSharks\s2MemberX\Classes\SCoreFacades as s;
-use WebSharks\WpSharks\s2MemberX\Classes\CoreFacades as c;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\AppFacades as a;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\SCoreFacades as s;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\CoreFacades as c;
 #
 use WebSharks\WpSharks\Core\Classes as SCoreClasses;
 use WebSharks\WpSharks\Core\Interfaces as SCoreInterfaces;
@@ -59,7 +59,7 @@ class OrderItemMeta extends SCoreClasses\SCore\Base\Core
         parent::__construct($App);
 
         $this->subscription_post_type = a::subscriptionPostType();
-        $this->product_meta_prefix    = a::productMetaPrefix();
+        $this->product_meta_prefix    = a::productMetaPrefix().'product_';
     }
 
     /**

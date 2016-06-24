@@ -1,3 +1,12 @@
+## v160624.34191
+
+- Rebranding. Adding `woocommerce-` prefix.
+
+## v160624.32326
+
+- Updating to latest WPSC.
+- Bug fix. `woocommerce_order_given` is an action not a filter.
+
 ## v160611.60015
 
 - Moving Order Item utilities to the WPSC.

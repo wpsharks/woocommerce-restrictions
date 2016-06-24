@@ -1,8 +1,8 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\s2MemberX;
+namespace WebSharks\WpSharks\WooCommerce\s2MemberX;
 
-use WebSharks\WpSharks\s2MemberX\Classes\App;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\App;
 
 if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));

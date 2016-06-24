@@ -1,14 +1,14 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\s2MemberX\Classes;
+namespace WebSharks\WpSharks\WooCommerce\s2MemberX\Classes;
 
-use WebSharks\WpSharks\s2MemberX\Classes;
-use WebSharks\WpSharks\s2MemberX\Interfaces;
-use WebSharks\WpSharks\s2MemberX\Traits;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Interfaces;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Traits;
 #
-use WebSharks\WpSharks\s2MemberX\Classes\AppFacades as a;
-use WebSharks\WpSharks\s2MemberX\Classes\SCoreFacades as s;
-use WebSharks\WpSharks\s2MemberX\Classes\CoreFacades as c;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\AppFacades as a;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\SCoreFacades as s;
+use WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\CoreFacades as c;
 #
 use WebSharks\WpSharks\Core\Classes as SCoreClasses;
 use WebSharks\WpSharks\Core\Interfaces as SCoreInterfaces;
@@ -36,7 +36,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160611.60015'; //v//
+    const VERSION = '160624.34191'; //v//
 
     /**
      * Constructor.
@@ -69,17 +69,19 @@ class App extends SCoreClasses\App
                 '§is_network_wide' => false,
             ],
             '©brand' => [
-                '©name'         => 's2Member X',
-                '©text_domain'  => 's2member-x',
-                '©slug'         => 's2member-x',
-                '©var'          => 's2member_x',
-                '©acronym'      => 's2x',
-                '©prefix'       => 's2x',
-                'short_acronym' => 's2',
+                '©name'    => 'WooCommerce Restrictions — s2Member X',
+                '©acronym' => 'WC S2X',
 
-                '§rest_action_base' => '©var',
-                '§domain'           => 'wpsharks.com',
-                '§domain_path'      => '/product/s2member-x',
+                '©text_domain' => 'woocommerce-s2member-x',
+
+                '©slug' => 'woocommerce-s2member-x',
+                '©var'  => 'woocommerce_s2member_x',
+
+                '©short_slug' => 'wc-s2x',
+                '©short_var'  => 'wc_s2x',
+
+                '§domain'      => 'wpsharks.com',
+                '§domain_path' => '/product/woocommerce-s2member-x',
             ],
             '§pro_option_keys' => [
                 'if_shortcode_expr_enable',
@@ -121,13 +123,13 @@ class App extends SCoreClasses\App
                 ],
                 '§others' => [
                     'fancy_permalinks' => [
-                        'name'        => __('Fancy Permalinks', 's2member-x'),
-                        'description' => __('a Permalink Structure other than <em>plain</em>', 's2member-x'),
+                        'name'        => __('Fancy Permalinks', 'woocommerce-s2member-x'),
+                        'description' => __('a Permalink Structure other than <em>plain</em>', 'woocommerce-s2member-x'),
 
                         'test' => function (string $key) {
                             if (!get_option('permalink_structure')) {
                                 return [
-                                    'how_to_resolve' => sprintf(__('<a href="%1$s">change your Permalink settings</a> to anything but <em>plain</em>', 's2member-x'), esc_url(admin_url('/options-permalink.php'))),
+                                    'how_to_resolve' => sprintf(__('<a href="%1$s">change your Permalink settings</a> to anything but <em>plain</em>', 'woocommerce-s2member-x'), esc_url(admin_url('/options-permalink.php'))),
                                     'cap_to_resolve' => 'manage_options',
                                 ];
                             }
@@ -245,14 +247,14 @@ class App extends SCoreClasses\App
             add_filter('woocommerce_hidden_order_itemmeta', [$this->Utils->OrderItemMeta, 'onHiddenOrderItemMeta']);
 
             // See: <https://www.woothemes.com/products/woocommerce-give-products/>
-            add_filter('woocommerce_order_given', [$this->Utils->OrderItemMeta, 'onOrderGiven']);
+            add_action('woocommerce_order_given', [$this->Utils->OrderItemMeta, 'onOrderGiven']);
 
             add_action('woocommerce_order_status_changed', [$this->Utils->OrderStatus, 'onOrderStatusChanged'], 1000, 3);
             add_action('woocommerce_subscription_status_changed', [$this->Utils->OrderStatus, 'onSubscriptionStatusChanged'], 1000, 3);
             add_action('woocommerce_subscriptions_switched_item', [$this->Utils->OrderStatus, 'onSubscriptionItemSwitched'], 1000, 3);
 
             // See: <https://www.woothemes.com/products/woocommerce-give-products/>
-            add_filter('woocommerce_order_given', [$this->Utils->OrderStatus, 'onOrderGiven']);
+            add_action('woocommerce_order_given', [$this->Utils->OrderStatus, 'onOrderGiven']);
 
             // ↓ This would seem to be a bug in the WCS package.
             // We are moving this to after 'items', so that status changes will reflect new items.

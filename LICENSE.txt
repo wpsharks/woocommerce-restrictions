@@ -1,5 +1,35 @@
 
 
+Copyright [WP Sharks™](https://wpsharks.com)
+
+Credits / Additional Acknowledgments:
+
+* Software designed for WordPress®.
+  - GPL License <https://github.com/WordPress/WordPress/blob/master/license.txt>
+  - WordPress® <https://github.com/wordpress/wordpress>
+
+* Software designed for WooCommerce™.
+  - GPL License <https://github.com/woothemes/woocommerce/blob/master/license.txt>
+  - WooCommerce™ <https://github.com/woothemes/woocommerce>
+
+* Some JavaScript extensions require jQuery.
+  - GPL-Compatible License <http://jquery.org/license>
+  - jQuery <http://jquery.com/>
+
+* CSS framework and some JavaScript functionality provided by Semantic UI.
+  - GPL-Compatible License <https://github.com/Semantic-Org/Semantic-UI/blob/master/LICENSE.md>
+  - Semantic UI <https://github.com/Semantic-Org/Semantic-UI>
+
+* CSS framework and some JavaScript functionality provided by Bootstrap.
+  - GPL-Compatible License <http://getbootstrap.com/getting-started/#license-faqs>
+  - Bootstrap <http://getbootstrap.com/>
+
+* CSS and several icons provided by Font Awesome.
+  - GPL-Compatible License <http://fortawesome.github.io/Font-Awesome/license/>
+  - Font Awesome <http://fortawesome.github.io/Font-Awesome/>
+
+------------------------------------------------------------------------------------------------
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
