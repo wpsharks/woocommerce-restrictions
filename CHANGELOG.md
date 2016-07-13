@@ -1,3 +1,7 @@
+## v160713.41153
+
+- Updating to the latest WP Sharks Core.
+
 ## v160707.3144
 
 - Pulling the `[if /]` shortcode out into a separate plugin before official release.
