@@ -36,7 +36,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160718.71135'; //v//
+    const VERSION = '160727.6263'; //v//
 
     /**
      * Constructor.
@@ -105,7 +105,7 @@ class App extends SCoreClasses\App
                         'url'         => 'https://wordpress.org/plugins/woocommerce/',
                         'archive_url' => 'https://wordpress.org/plugins/woocommerce/developers/',
                         'test'        => function (string $slug) {
-                            $min_version = '2.5.5'; // Update when necessary.
+                            $min_version = '2.6.2'; // Update when necessary.
                             if (version_compare(WC_VERSION, $min_version, '<')) {
                                 return [
                                     'min_version' => $min_version,

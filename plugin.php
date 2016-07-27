@@ -4,7 +4,7 @@
  *
  * @wp-plugin
  *
- * Version: 160718.71135
+ * Version: 160727.6263
  * Text Domain: woocommerce-s2member-x
  * Plugin Name: WooCommerce Restrictions — s2Member X Pro
  *
@@ -14,7 +14,7 @@
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * Plugin URI: https://wpsharks.com/product/woocommerce-s2member-x
+ * Plugin URI: https://wpsharks.com/product/woocommerce-s2member-x-pro
  * Description: Membership functionality for WooCommerce.
  */
 // PHP v5.2 compatible.
