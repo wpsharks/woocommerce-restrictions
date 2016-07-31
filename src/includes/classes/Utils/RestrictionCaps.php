@@ -1,4 +1,10 @@
 <?php
+/**
+ * Restriction caps.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\Utils;
 
@@ -34,7 +40,7 @@ class RestrictionCaps extends SCoreClasses\SCore\Base\Core
      *
      * @since 160524 Restrictions.
      *
-     * @type array All caps.
+     * @var array All caps.
      */
     public $caps;
 
@@ -74,19 +80,17 @@ class RestrictionCaps extends SCoreClasses\SCore\Base\Core
      * Add default caps.
      *
      * @since 160524 Restrictions.
-     *
-     * @note Must be compatible w/ config `§caps['§manage']`.
      */
     public function addDefaults()
     {
-        foreach (['administrator'] as $_role) {
-            if (!is_object($_role = get_role($_role))) {
+        foreach (['administrator', 'editor', 'shop_manager'] as $_role) {
+            if (!($_WP_Role = get_role($_role))) {
                 continue; // Not possible.
             }
             foreach ($this->caps as $_cap) {
-                $_role->add_cap($_cap);
-            }
-        } // unset($_role, $_cap); // Housekeeping.
+                $_WP_Role->add_cap($_cap);
+            } // unset($_cap);
+        } // unset($_role, $_WP_Role);
     }
 
     /**
@@ -97,13 +101,13 @@ class RestrictionCaps extends SCoreClasses\SCore\Base\Core
     public function removeAll()
     {
         foreach (array_keys(wp_roles()->roles) as $_role) {
-            if (!is_object($_role = get_role($_role))) {
+            if (!($_WP_Role = get_role($_role))) {
                 continue; // Not possible.
             }
             foreach ($this->caps as $_cap) {
-                $_role->remove_cap($_cap);
-            }
-        } // unset($_role, $_cap); // Housekeeping.
+                $_WP_Role->remove_cap($_cap);
+            } // unset($_cap);
+        } // unset($_role, $_WP_Role);
     }
 
     /**
