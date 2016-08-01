@@ -1,9 +1,9 @@
 <?php
 /**
- * Order utilities.
+ * Menu page utils.
  *
  * @author @jaswsinc
- * @copyright WebSharks™
+ * @copyright WP Sharks™
  */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\WooCommerce\s2MemberX\Classes\Utils;
@@ -29,32 +29,31 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Order utilities.
+ * Menu page utils.
  *
- * @since 160524 Order utilities.
+ * @since 160731 Initial release.
  */
-class Order extends SCoreClasses\SCore\Base\Core
+class MenuPage extends SCoreClasses\SCore\Base\Core
 {
     /**
-     * Post type.
+     * Adds menu pages.
      *
-     * @since 160524 Order utilities.
-     *
-     * @var string Post type.
+     * @since 160731 Initial release.
      */
-    public $post_type;
-
-    /**
-     * Class constructor.
-     *
-     * @since 160524 Order utilities.
-     *
-     * @param Classes\App $App Instance.
-     */
-    public function __construct(Classes\App $App)
+    public function onAdminMenu()
     {
-        parent::__construct($App);
+        s::addMenuPageItem([
+            'menu_title'    => __('Options', 'woocommerce-s2member-x'),
+            'parent_page'   => 'edit.php?post_type=restriction',
+            'template_file' => 'admin/menu-pages/options/default.php',
 
-        $this->post_type = 'shop_order'; // Established by WooCommerce.
+            'tabs' => [
+                'default' => sprintf(__('%1$s', 'woocommerce-s2member-x'), esc_html($this->App->Config->©brand['©name'])),
+                'restore' => [
+                    'label' => __('Restore Default Options', 'woocommerce-s2member-x'),
+                    'url'   => s::restoreDefaultOptionsUrl(), 'onclick' => 'confirm',
+                ],
+            ],
+        ]);
     }
 }
