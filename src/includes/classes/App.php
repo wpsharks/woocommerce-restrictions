@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @var string Version.
      */
-    const VERSION = '160801.34929'; //v//
+    const VERSION = '160828.49771'; //v//
 
     /**
      * Constructor.
@@ -93,13 +93,16 @@ class App extends SCoreClasses\App
             '§default_options' => [
                 'security_gate_redirects_to_post_id'    => 0,
                 'security_gate_redirect_to_args_enable' => true,
+                'security_gate_redirect_arg_name'       => 'requires',
                 'orders_always_grant_immediate_access'  => false,
             ],
 
             '§conflicts' => [
                 '§plugins' => [
-                    's2member'               => 's2Member Framework (Old)',
-                    's2member-pro'           => 's2Member Pro Add-On (Old)',
+                    /*  Disable for now. Allow migrations.
+                        's2member'     => 's2Member Framework (Old)',
+                        's2member-pro' => 's2Member Pro Add-On (Old)',
+                     */
                     'woocommerce-membership' => 'WooCommerce Membership',
                 ], // <https://www.woothemes.com/products/woocommerce-memberships/>
             ],
@@ -150,6 +153,7 @@ class App extends SCoreClasses\App
     {
         parent::onSetupEarlyHooks();
 
+        s::addAction('vs_upgrades', [$this->Utils->Installer, 'onVsUpgrades']);
         s::addAction('other_install_routines', [$this->Utils->Installer, 'onOtherInstallRoutines']);
         s::addAction('other_uninstall_routines', [$this->Utils->Uninstaller, 'onOtherUninstallRoutines']);
     }
