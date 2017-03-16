@@ -4,7 +4,7 @@
  *
  * @wp-plugin
  *
- * Version: 160909.58455
+ * Version: 170316.637
  * Text Domain: woocommerce-restrictions
  * Plugin Name: WooCommerce Restrictions Pro
  *
@@ -20,7 +20,7 @@
 // PHP v5.2 compatible.
 
 if (!defined('WPINC')) {
-    exit('Do NOT access this file directly: '.basename(__FILE__));
+    exit('Do NOT access this file directly.');
 }
 require dirname(__FILE__).'/src/includes/wp-php-rv.php';
 

@@ -1,3 +1,11 @@
+## v170316.637
+
+- Updating minimum required version of the WP Sharks Core.
+- Minor tweaks in styles/scripts to enhance dependency order.
+- Bug fix. Illegal offset set when protecting by URI Pattern.
+- Bug fix. Call to undefined method `a::collectPostMeta()`. Should be `s::`.
+- Enhancing security by removing `basename(__FILE__)` from direct access notices.
+
 ## v160909.58455
 
 - Enhancing Dashboard styles and help icons.

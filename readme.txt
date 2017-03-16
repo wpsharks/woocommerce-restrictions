@@ -1,8 +1,8 @@
 === WooCommerce Restrictions ===
 
-Stable tag: 160909.58455
+Stable tag: 170316.637
 
-Tested up to: 4.6
+Tested up to: 4.8-beta
 Requires at least: 4.5.3
 
 Text Domain: woocommerce-restrictions
